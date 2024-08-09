@@ -3,7 +3,7 @@
 
 #include "atlas.h"
 #include "util.h"
-
+#include "camera.h"
 #include <functional>
 #include <graphics.h>
 
@@ -53,7 +53,7 @@ public:
 		return (idx_frame == atlas->get_size() - 1);
 	}
 
-	void on_updated(int delta)
+	void on_update(int delta)
 	{
 		timer += delta;
 		if (timer >= interval)
@@ -72,9 +72,9 @@ public:
 
 	}
 
-	void on_draw(int x, int y) const
+	void on_draw(const Camera& camera, int x, int y) const
 	{
-		putimage_alpha(x, y, atlas->get_image(idx_frame));
+		putimage_alpha(camera, x, y, atlas->get_image(idx_frame));
 	}
 
 	void set_callback(std::function<void()> callback)

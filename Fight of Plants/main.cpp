@@ -5,7 +5,9 @@
 #include "game_scene.h"
 #include "selector_scene.h"
 #include "scene_manager.h"
+#include "platform.h" 
 #include <graphics.h>
+#include <vector>
 #include <iostream>
 
 #pragma comment(lib, "Winmm.lib")
@@ -32,6 +34,7 @@ IMAGE img_peashooter_selector_background_left; // 选角界面朝向左的婉逗射手背景图
 IMAGE img_peashooter_selector_background_right; // 选角界面朝向右的婉逗射手背景图片
 IMAGE img_sunflower_selector_background_left; // 选角界面朝向左的龙日葵背景图片
 IMAGE img_sunflower_selector_background_right; // 选角界面朝向右的龙日葵背景图片
+
 IMAGE img_sky; // 天空图片
 IMAGE img_hills; // 山脉图片
 IMAGE img_platform_large; // 大型平台图片
@@ -82,6 +85,8 @@ Scene* selector_scene = nullptr;
 
 Camera main_camera;
 SceneManager scene_manager;
+
+std::vector<Platform> platfrom_list;
 
 void flip_atlas(Atlas& src, Atlas& dst)
 {
@@ -186,6 +191,8 @@ int main()
 	load_game_resources();
 
 	initgraph(1280, 720, EW_SHOWCONSOLE);
+	settextstyle(28, 0, _T("IPix"));
+	setbkmode(TRANSPARENT);
 
 	BeginBatchDraw();
 

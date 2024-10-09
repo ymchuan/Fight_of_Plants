@@ -1,5 +1,9 @@
 #include "util.h"
 #include "atlas.h"
+#include "bullet.h"
+#include "player.h"
+#include "peashooter_player.h"
+#include "sunflower_player.h"
 #include "scene.h"
 #include "menu_scene.h"
 #include "game_scene.h"
@@ -11,6 +15,8 @@
 #include <iostream>
 
 #pragma comment(lib, "Winmm.lib")
+
+bool is_debug = false; // 调试模式
 
 IMAGE img_menu_background; // 主菜单背景图片
 IMAGE img_VS; // 艺术字图片// VS
@@ -86,7 +92,14 @@ Scene* selector_scene = nullptr;
 Camera main_camera;
 SceneManager scene_manager;
 
-std::vector<Platform> platfrom_list;
+std::vector<Platform> platform_list;
+std::vector<Bullet*> bullet_list;
+
+Player* player_1 = nullptr;
+Player* player_2 = nullptr;
+
+IMAGE* img_player_1_avator = nullptr;
+IMAGE* img_player_2_avator = nullptr;
 
 void flip_atlas(Atlas& src, Atlas& dst)
 {

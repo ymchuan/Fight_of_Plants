@@ -1,12 +1,18 @@
 #ifndef _SELECTOR_SCENE_H
 #define _SELECTOR_SCENE_H
 
-
+#include "peashooter_player.h"
+#include "sunflower_player.h"
+#include "player_id.h"
 #include "scene.h"
 #include "atlas.h"
+
 #include "scene_manager.h"
 #include "animation.h"
 #include <graphics.h>
+
+extern Player* player_1;
+extern Player* player_2;
 
 extern IMAGE img_VS;
 extern IMAGE img_1P;
@@ -37,6 +43,9 @@ extern Atlas atlas_sunflower_idle_right;
 
 extern IMAGE img_avatar_peashooter;
 extern IMAGE img_avatar_sunflower;
+
+extern IMAGE* img_player_1_avator;
+extern IMAGE* img_player_2_avator;
 
 extern SceneManager scene_manager;
 
@@ -104,7 +113,7 @@ public:
 		IMAGE* img_p1_selector_background = nullptr;
 		IMAGE* img_p2_selector_background = nullptr;
 
-		switch (player_type_2)
+		switch (player_type_1)
 		{
 		case PlayerType::Peashooter:
 			img_p1_selector_background = &img_peashooter_selector_background_right;
@@ -113,10 +122,10 @@ public:
 			img_p1_selector_background = &img_sunflower_selector_background_right; 
 			break;
 		default:
-			img_p1_selector_background = &img_peashooter_selector_background_right; 
+			img_p1_selector_background = &img_peashooter_selector_background_right;
 			break;
 		}
-		switch (player_type_1)
+		switch (player_type_2)
 		{
 		case PlayerType::Peashooter:
 			img_p2_selector_background = &img_peashooter_selector_background_left;
@@ -130,9 +139,11 @@ public:
 		}
 		putimage(0, 0, &img_selector_background);
 
-		putimage_alpha(selector_background_scroll_offset_x - img_p1_selector_background->getwidth(), 0, img_p1_selector_background);
+		putimage_alpha(selector_background_scroll_offset_x 
+			- img_p1_selector_background->getwidth(), 0,
+			img_p1_selector_background);
 		putimage_alpha(selector_background_scroll_offset_x, 0, 
-			img_p1_selector_background->getwidth() - selector_background_scroll_offset_x, 0, img_p2_selector_background, 0, 0);
+			img_p1_selector_background->getwidth() - selector_background_scroll_offset_x, 0, img_p1_selector_background, 0, 0);
 
 		putimage_alpha(getwidth() - img_p2_selector_background->getwidth(), 0, img_p2_selector_background->getwidth() -
 			selector_background_scroll_offset_x, 0, img_p2_selector_background, selector_background_scroll_offset_x, 0);
@@ -254,8 +265,35 @@ public:
 
 	void on_exit()
 	{
+		switch (player_type_1)
+		{
+		case PlayerType::Peashooter:
+			player_1 = new PeashooterPlayer();
+			img_player_1_avator = &img_avatar_peashooter;
+			break;
+		case PlayerType::Sunflower:
+			player_1 = new SunflowerPlayer();
+			img_player_1_avator = &img_avatar_sunflower;
+			break;
+		}
+		player_1->set_id(PlayerID::P1);
 
+		switch (player_type_2)
+		{
+		case PlayerType::Peashooter:
+			player_2 = new PeashooterPlayer(false);
+			img_player_2_avator = &img_avatar_peashooter;
+			break;
+		case PlayerType::Sunflower:
+			player_2 = new SunflowerPlayer(false);
+			img_player_2_avator = &img_avatar_sunflower;
+			break;
+		}
+		player_2->set_id(PlayerID::P2);
+
+		mciSendString(_T("stop bgm_menu"), NULL, 0, NULL);
 	}
+
 private:
 	enum class PlayerType
 	{

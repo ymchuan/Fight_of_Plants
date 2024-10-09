@@ -17,9 +17,9 @@ extern IMAGE img_hills;
 extern IMAGE img_platform_large;
 extern IMAGE img_platform_small;
 
-extern IMAGE img_1P_winner; // 1P »ñÊ¤ÎÄ±¾Í¼Æ¬
-extern IMAGE img_2P_winner; // 2P »ñÊ¤ÎÄ±¾Í¼Æ¬
-extern IMAGE img_winner_bar; // »ñÊ¤Íæ¼ÒÎÄ±¾±³¾°Í¼Æ¬
+extern IMAGE img_1P_winner; // 1P ï¿½ï¿½Ê¤ï¿½Ä±ï¿½Í¼Æ¬
+extern IMAGE img_2P_winner; // 2P ï¿½ï¿½Ê¤ï¿½Ä±ï¿½Í¼Æ¬
+extern IMAGE img_winner_bar; // ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 
 extern Camera main_camera;
 extern std::vector<Platform> platform_list; 
@@ -188,7 +188,7 @@ public:
 		if (is_debug)
 		{
 			settextcolor( RGB(255, 0, 0) );
-			outtextxy(15, 15, _T("ÒÑ¿ªÆôµ÷ÊÔÄ£Ê½£¬°´Q¼ü¹Ø±Õ"));
+			outtextxy(15, 15, _T("è¿›å…¥è°ƒè¯•æ¨¡å¼ï¼š"));
 		}
 
 		player_1->on_draw(camera);
@@ -239,9 +239,9 @@ public:
 		main_camera.reset();
 	}
 private:
-	const float speed_winner_bar = 3.0f;// ½áËã¶¯Ð§±³¾°ÒÆ¶¯ËÙ¶È
+	const float speed_winner_bar = 3.0f;// ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
 	
-	const float speed_winner_text = 1.5f; // ½áËã¶¯Ð§ÎÄ±¾ÒÆ¶¯ËÙ¶È
+	const float speed_winner_text = 1.5f; // ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½Ä±ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
 private:
 	POINT pos_img_sky = { 0 }; // sky background position
 	POINT pos_img_hills = { 0 };// hills background position
@@ -250,10 +250,10 @@ private:
 	StatusBar status_bar_2P;
 
 	bool is_game_over = false;
-	POINT pos_img_winner_text = { 0 };//½áËã¶¯Ð§ÎÄ±¾Î»ÖÃ
-	POINT pos_img_winner_bar = { 0 }; // ½áËã¶¯Ð§±³¾°Î»ÖÃ
-	int pos_x_img_winner_bar_dst = 0;//½áËã¶¯Ð§±³¾°ÒÆ¶¯µÄÄ¿±êÎ»ÖÃ
-	int pos_x_img_winner_text_dst = 0; // ½áËã¶¯Ð§ÎÄ±¾ÒÆ¶¯µÄÄ¿±êÎ»ÖÃ
+	POINT pos_img_winner_text = { 0 };//ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½Ä±ï¿½Î»ï¿½ï¿½
+	POINT pos_img_winner_bar = { 0 }; // ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	int pos_x_img_winner_bar_dst = 0;//ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
+	int pos_x_img_winner_text_dst = 0; // ï¿½ï¿½ï¿½ã¶¯Ð§ï¿½Ä±ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Î»ï¿½ï¿½
 	Timer timer_winner_slide_in;
 	Timer timer_winner_slide_out;
 	bool is_slide_out_started = false;
